@@ -32,6 +32,15 @@ public class Grid {
 	Vec2 mCenterCross;
 	float mScreenRatio;
 
+	private FloatBuffer verBuffer;
+	float[] vertice = new float[] {
+			-1.0f, -1.0f,
+			-1.0f, 1.0f,
+			1.0f, -1.0f,
+			1.0f, 1.0f
+	};
+
+
 
 	public Grid() {
 		this(18, 32, new Color(1f, 0f, 0f), 4, new Vec2(0f, 0f), new Color(0f, 1f, 0f), 12f, GridRenderer.RenderMode.DOUBLE);
@@ -188,6 +197,18 @@ public class Grid {
 		asFloatBuffer();
 	    gridCenterBuffer.put(gridCenterVertices);
 	    gridCenterBuffer.position(0);
+
+
+
+
+
+
+
+		verBuffer = ByteBuffer.allocateDirect(vertice.length * FLOAT_SIZE_BYTES).
+				order(ByteOrder.nativeOrder()).
+				asFloatBuffer();
+		verBuffer.put(vertice);
+		verBuffer.position(0);
 	}
 	
 	 public FloatBuffer getLineBuffer() {
@@ -207,5 +228,7 @@ public class Grid {
 		mScreenRatio = ratio;
 	}
 	  
-	 
+	 public FloatBuffer getVerBuffer() { return verBuffer;}
+	public int getVerPointCount() { return vertice.length / DIMENSION;}
+
 }

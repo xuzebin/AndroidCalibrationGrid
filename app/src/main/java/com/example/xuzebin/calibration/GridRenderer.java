@@ -39,6 +39,8 @@ public class GridRenderer implements GLSurfaceView.Renderer {
 
     RenderMode mRenderMode;
 
+
+
 	public GridRenderer(Context context) {
 		mContext = context;
         mRenderMode = RenderMode.DOUBLE;
@@ -86,17 +88,17 @@ public class GridRenderer implements GLSurfaceView.Renderer {
 
         if (mRenderMode == RenderMode.DOUBLE) {
             GLES20.glViewport(0, 0, mWidth / 2, mHeight);
-            renderCenterCross(leftGrid);
+//            renderCenterCross(leftGrid);
             renderLine(leftGrid);
 
 
             GLES20.glViewport(mWidth / 2, 0, mWidth / 2, mHeight);
-            renderCenterCross(rightGrid);
+//            renderCenterCross(rightGrid);
             renderLine(rightGrid);
 
         } else if (mRenderMode == RenderMode.SINGLE) {
             GLES20.glViewport(0, 0, mWidth, mHeight);
-            renderCenterCross(leftGrid);
+//            renderCenterCross(leftGrid);
             renderLine(leftGrid);
         }
 	}
@@ -136,17 +138,19 @@ public class GridRenderer implements GLSurfaceView.Renderer {
      */
     public void renderLine(Grid grid) {
         GLES20.glUseProgram(mProgramHandle);
-        GLES20.glLineWidth(grid.getLineThickness());
+//        GLES20.glLineWidth(grid.getLineThickness());
 
         Color linecolor = grid.getLineColor();
         GLES20.glUniform3f(uColorHandle, linecolor.r, linecolor.g, linecolor.b);
         
         GLES20.glEnableVertexAttribArray(aPositionHandle);
-        GLES20.glVertexAttribPointer(aPositionHandle, grid.DIMENSION, GLES20.GL_FLOAT, false, 0, grid.getLineBuffer());
+//        GLES20.glVertexAttribPointer(aPositionHandle, grid.DIMENSION, GLES20.GL_FLOAT, false, 0, grid.getLineBuffer());
+        GLES20.glVertexAttribPointer(aPositionHandle, grid.DIMENSION, GLES20.GL_FLOAT, false, 0, grid.getVerBuffer());
 
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
 
-        GLES20.glDrawArrays(GLES20.GL_LINES, 0, grid.getLinePointCount());
+//        GLES20.glDrawArrays(GLES20.GL_LINES, 0, grid.getLinePointCount());
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, grid.getVerPointCount());
 
         GLES20.glDisableVertexAttribArray(aPositionHandle);
         GLES20.glLineWidth(1);

@@ -18,9 +18,10 @@ public class CaliGLSurfaceView extends GLSurfaceView{
         renderer = new GridRenderer(context);
         renderer.setRenderMode(GridRenderer.RenderMode.DOUBLE);
         //-1 indicates grids' width and height will be set as equally as possible
-        renderer.initGrids(18, -1);
+        renderer.initGrids(2, 2);
 
         setRenderer(renderer);
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+
 	}
 }

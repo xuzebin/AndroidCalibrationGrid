@@ -6,13 +6,13 @@ Grid can be customized by setting size, color, thickness, etc.
 
 Rendered using OpenGL ES 2.0.
 
-## Screenshot
+## Screenshots
 
 ![](screenshot0.png)
 
 ![](screenshot1.png)
 
-1[](screenshot2.png)
+![](screenshot2.png)
 
 ## Meta
 
